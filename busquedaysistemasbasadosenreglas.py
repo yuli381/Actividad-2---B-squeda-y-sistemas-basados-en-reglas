@@ -128,3 +128,47 @@ class MotorInferenciaTransMilenio:
             return rutas_trasbordo[0]
 
         return None
+
+
+
+# ==========================================================
+# 3. INTERFAZ DE USUARIO Y PRUEBAS EN CONSOLA
+# ==========================================================
+
+def ejecutar_sistema():
+    print("=" * 60)
+    print(" SISTEMA BASADO EN CONOCIMIENTO: RUTAS TRANSMILENIO")
+    print("=" * 60)
+    print("Estaciones disponibles en el sistema:")
+    for idx, est in enumerate(ESTACIONES, 1):
+        print(f" {idx}. {est}")
+    print("-" * 60)
+
+    try:
+        idx_origen = int(input("Seleccione el número de la estación de ORIGEN (Punto A): ")) - 1
+        idx_destino = int(input("Seleccione el número de la estación de DESTINO (Punto B): ")) - 1
+        if not (0 <= idx_origen < len(ESTACIONES) and 0 <= idx_destino < len(ESTACIONES)):
+            print("\n[Error] Selección inváida. Elija un número de la lista.")
+            return
+
+        origen = ESTACIONES[idx_origen]
+        destino = ESTACIONES[idx_destino]
+        print(f"\n[Calculando mejor ruta desde '{origen}' hasta '{destino}'...]")
+        resultado = MotorInferenciaTransMilenio.buscar_mejor_ruta(origen, destino)
+        print("\n" + "=" * 60)
+        print(" RESULTADO DE LA INFERENCIA LÓGICA")
+        print("=" * 60)
+        if resultado:
+            print(f"Tipo de Ruta       : {resultado['tipo']}")
+            print(f"Trasbordos         : {resultado['trasbordos']}")
+            print(f"Tiempo Estimado    : {resultado['tiempo_estimado']} minutos")
+            print("\nInstrucciones de Viaje:")
+            for paso in resultado["detalle"]:
+                print(f" -> {paso}")
+        else:
+            print("No se encontró una ruta lógica válida para conectar los dos puntos seleccionados.")
+    except ValueError:
+        print("\n[Error] Debe ingresar únicamente números enteros.")
+
+if __name__ == "__main__":
+    ejecutar_sistema()
