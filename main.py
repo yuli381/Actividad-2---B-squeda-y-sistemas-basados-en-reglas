@@ -16,9 +16,8 @@ Modelado con representación del conocimiento y motor de reglas lógicas de infe
 
 from typing import List, Dict, Optional, Tuple
 
-# ==========================================================
 # 1. BASE DE CONOCIMIENTO (Hechos del Dominio)
-# ==========================================================
+
 
 # Estaciones del sistema (Segmento representativo)
 ESTACIONES = [
@@ -40,9 +39,9 @@ TIEMPO_ENTRE_ESTACIONES = 3
 TIEMPO_TRASBORDO = 5  # Penalización por trasbordo en minutos
 
 
-# ==========================================================
+
 # 2. MOTOR DE INFERENCIA Y REGLAS LÓGICAS
-# ==========================================================
+
 
 class MotorInferenciaTransMilenio:
 
@@ -131,9 +130,8 @@ class MotorInferenciaTransMilenio:
 
 
 
-# ==========================================================
 # 3. INTERFAZ DE USUARIO Y PRUEBAS EN CONSOLA
-# ==========================================================
+
 
 def ejecutar_sistema():
     print("=" * 60)
